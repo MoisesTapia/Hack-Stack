@@ -111,7 +111,7 @@ docker-compose exec metasploit docker/entrypoint.sh ./msfconsole -r docker/msfco
 
 ya que la ajecutamos podemos ver la siguiente salida:
 
-![Texto alternativo](https://github.com/MoisesTapia/Hack-Stack/blob/master/img/metasploit_connection_up.png)
+![Texto alternativo](https://github.com/MoisesTapia/Hack-Stack/blob/master/img/metasploit_connection_up2.png)
 
 ## Saliendo
 
