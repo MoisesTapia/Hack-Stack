@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+
+    grafana:
+
+        container_name: grafana
+        image: grafana/grafana:7.0.4
+        user: "1000"
+        volumes: 
+            - "$PWD/grafana:/var/lib/grafana"
+        ports: 
+            - 3000:3000
+
+    metasploit:
+
+      container_name: metasploit
+      image: metasploitframework/metasploit-framework:latest
+      environment:
+        DATABASE_URL: postgres://postgres:msfpassword@db:5432/msf
+      links:
+        - db
+      tty: true        # docker run -t
+      ports:
+        - 4444:4444
+      volumes:
+        - "$PWD/.msf4:/home/msf/.msf4"
+
+    db:
+
+      container_name: postgres
+      image: postgres:10-alpine
+      environment: 
+        - POSTGRES_PASSWORD=msfpassword
+        - POSTGRES_DB=msf
+      stdin_open: true # docker run -i
+      tty: true        # docker run -t
+      volumes:
+        - "$PWD/db:/var/lib/postgresql/data"
+      ports: 
+        - 5432:5432
