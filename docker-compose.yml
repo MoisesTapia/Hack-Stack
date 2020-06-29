@@ -14,28 +14,46 @@ services:
 
     metasploit:
 
-      container_name: metasploit
-      image: metasploitframework/metasploit-framework:latest
-      environment:
-        DATABASE_URL: postgres://postgres:msfpassword@db:5432/msf
-      links:
-        - db
-      tty: true        # docker run -t
-      ports:
-        - 4444:4444
-      volumes:
-        - "$PWD/.msf4:/home/msf/.msf4"
+        container_name: metasploit
+        image: metasploitframework/metasploit-framework:latest
+        environment:
+          DATABASE_URL: postgres://postgres:msfpassword@db:5432/msf
+        links:
+          - db
+        tty: true        # docker run -t
+        privileged: true
+        ports:
+          - 4444:4444
+        volumes:
+          - "$PWD/.msf4:/home/msf/.msf4"
 
     db:
 
-      container_name: postgres
-      image: postgres:10-alpine
-      environment: 
-        - POSTGRES_PASSWORD=msfpassword
-        - POSTGRES_DB=msf
-      stdin_open: true # docker run -i
-      tty: true        # docker run -t
-      volumes:
-        - "$PWD/db:/var/lib/postgresql/data"
-      ports: 
-        - 5432:5432
+        container_name: postgres
+        image: postgres:10-alpine
+        environment: 
+          - POSTGRES_PASSWORD=msfpassword
+          - POSTGRES_DB=msf
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        volumes:
+          - "$PWD/db:/var/lib/postgresql/data"
+        ports: 
+          - 5432:5432
+    
+    dradis:
+
+        container_name: dradis
+        image: evait/dradis-ce
+        volumes: 
+            - $PWD/dradis/dbdata:/dbdata
+            - $PWD/dradis/templates:/opt/dradis-ce/templates
+        ports: 
+            - 3010:3000
+        links: 
+            - redis
+    
+    redis:
+        
+        container_name: redis
+        image: redis
