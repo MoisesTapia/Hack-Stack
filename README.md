@@ -7,6 +7,8 @@
 [![Postgre](https://img.shields.io/badge/PostgreSQL-latest-orange)](https://hub.docker.com/_/postgres)
 [![metasploit](https://img.shields.io/badge/Metasploit-5-success)](https://hub.docker.com/r/metasploitframework/metasploit-framework)
 [![grafana](https://img.shields.io/badge/Grafana-7.0.4-orange)](https://hub.docker.com/r/grafana/grafana)
+[![Dradis](https://img.shields.io/badge/Dradis-latest-yellow)](https://hub.docker.com/r/grafana/grafana)
+
 
 # Enviroment
 
